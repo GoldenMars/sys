@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sys_app/core/network/logging_interceptor.dart';
 import 'package:sys_app/core/network/network_info.dart';
 import 'package:sys_app/features/data/datasources/post_local_data_source.dart';
 import 'package:sys_app/features/data/datasources/post_remote_data_source.dart';
@@ -34,7 +35,7 @@ Future<void> init() async {
   // Datasources
 
   sl.registerLazySingleton<PostRemoteDataSource>(
-    () => PostRemoteDataSourceImpl(),
+    () => PostRemoteDataSourceImpl(sl<Dio>()),
   );
   sl.registerLazySingleton<PostLocalDataSource>(
     () => PostLocalDataSourceImpl(sharedPreferences: sl()),
@@ -48,6 +49,10 @@ Future<void> init() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton(() => InternetConnectionChecker.createInstance());
+  sl.registerLazySingleton<Dio>(() {
+    final dio = Dio();
+    dio.interceptors.add(LoggingInterceptor());
+    return dio;
+  });
 }

@@ -9,7 +9,9 @@ abstract class PostRemoteDataSource {
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
 class PostRemoteDataSourceImpl implements PostRemoteDataSource {
-  final dio = Dio();
+  final Dio dio;
+
+  PostRemoteDataSourceImpl(this.dio);
 
   @override
   Future<List<PostModel>> getAllPosts() async {

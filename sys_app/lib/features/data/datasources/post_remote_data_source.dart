@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:sys_app/core/error/exceptions.dart';
 import 'package:sys_app/features/data/models/post_model.dart';
@@ -18,7 +16,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
     final response = await dio.get(BASE_URL + '/posts/');
 
     if (response.statusCode == 200) {
-      final List decodedJson = json.decode(response.data) as List;
+      final List<dynamic> decodedJson = response.data as List<dynamic>;
       final List<PostModel> postModels =
           decodedJson
               .map<PostModel>(

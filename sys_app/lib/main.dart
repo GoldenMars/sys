@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sys_app/core/app_theme.dart';
 import 'package:sys_app/features/presentation/bloc/posts/posts_bloc.dart';
 import 'package:sys_app/features/presentation/pages/posts_page.dart';
 import 'package:sys_app/injection_container.dart' as di;
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        //theme: appTheme,
+        theme: darkAppTheme,
         title: 'Posts App',
         home: PostsPage(),
       ),

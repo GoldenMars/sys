@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Настройки темы приложения
 final Color darkPrimaryColor = Color(0xff121212); // Основной цвет фона
 final Color darkAccentColor = Color(0xffbb86fc); // Акцентный цвет
 final Color darkSecondaryColor = Color(

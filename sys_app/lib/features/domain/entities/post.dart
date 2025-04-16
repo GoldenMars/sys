@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// Сущность поста, представляющая основную модель данных
 class Post extends Equatable {
   final int? id;
   final String title;
@@ -8,5 +9,5 @@ class Post extends Equatable {
   const Post({this.id, required this.title, required this.body});
 
   @override
-  List<Object?> get props => [id, title, body];
+  List<Object?> get props => [id, title, body]; // Сравнение объектов
 }

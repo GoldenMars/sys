@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+//Классы для обработки ошибок
+
 abstract class Failure extends Equatable {}
 
 class ServerFailure extends Failure {

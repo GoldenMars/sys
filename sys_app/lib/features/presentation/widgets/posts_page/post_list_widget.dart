@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../domain/entities/post.dart';
 
+// Виджет для отображения списка постов
 class PostListWidget extends StatelessWidget {
   final List<Post> posts;
   const PostListWidget({Key? key, required this.posts}) : super(key: key);
@@ -29,10 +30,14 @@ class PostListWidget extends StatelessWidget {
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 10),
           onTap: () {
+            // Переход на страницу деталей поста при нажатии
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => PostDetailPage(post: posts[index]),
+                builder:
+                    (_) => PostDetailPage(
+                      post: posts[index],
+                    ), // Передача поста в детальный виджет
               ),
             );
           },

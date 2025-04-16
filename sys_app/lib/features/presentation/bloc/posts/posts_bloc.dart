@@ -10,17 +10,20 @@ import '../../../domain/usecases/get_all_posts.dart';
 part 'posts_event.dart';
 part 'posts_state.dart';
 
+// BLoC для управления состоянием постов
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
-  final GetAllPostsUsecase getAllPosts;
+  final GetAllPostsUsecase
+  getAllPosts; // Используемый класс для получения постов
+
   PostsBloc({required this.getAllPosts}) : super(PostsInitial()) {
     on<PostsEvent>((event, emit) async {
       if (event is GetAllPostsEvent) {
-        emit(LoadingPostsState());
+        emit(LoadingPostsState()); // Установка состояния загрузки
 
-        final failureOrPosts = await getAllPosts();
-        emit(_mapFailureOrPostsToState(failureOrPosts));
+        final failureOrPosts = await getAllPosts(); // Получение постов
+        emit(_mapFailureOrPostsToState(failureOrPosts)); // Обработка результата
       } else if (event is RefreshPostsEvent) {
-        emit(LoadingPostsState());
+        emit(LoadingPostsState()); // Установка состояния загрузки
 
         final failureOrPosts = await getAllPosts();
         emit(_mapFailureOrPostsToState(failureOrPosts));
@@ -28,13 +31,16 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
     });
   }
 
+  // Обработка результата получения постов или ошибок
   PostsState _mapFailureOrPostsToState(Either<Failure, List<Post>> either) {
     return either.fold(
-      (failure) => ErrorPostsState(message: _mapFailureToMessage(failure)),
-      (posts) => LoadedPostsState(posts: posts),
+      (failure) =>
+          ErrorPostsState(message: _mapFailureToMessage(failure)), // Ошибка
+      (posts) => LoadedPostsState(posts: posts), // Успешное получение постов
     );
   }
 
+  // Преобразование ошибок в сообщения
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:

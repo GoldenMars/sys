@@ -11,7 +11,7 @@ import 'package:sys_app/features/domain/repositories/posts_repository.dart';
 import 'package:sys_app/features/domain/usecases/get_all_posts.dart';
 import 'package:sys_app/features/presentation/bloc/posts/posts_bloc.dart';
 
-final sl = GetIt.instance;
+final sl = GetIt.instance; // Инициализация контейнера зависимостей
 
 Future<void> init() async {
   //Bloc
@@ -52,7 +52,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => InternetConnectionChecker.createInstance());
   sl.registerLazySingleton<Dio>(() {
     final dio = Dio();
-    dio.interceptors.add(LoggingInterceptor());
+    dio.interceptors.add(LoggingInterceptor()); // Добавление логгирования
     return dio;
   });
 }

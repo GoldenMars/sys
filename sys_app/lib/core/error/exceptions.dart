@@ -1,3 +1,5 @@
+// Определение исключений для обработки ошибок
+
 class ServerException implements Exception {}
 
 class EmptyCacheException implements Exception {}

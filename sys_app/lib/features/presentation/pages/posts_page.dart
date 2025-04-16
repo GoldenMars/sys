@@ -6,6 +6,7 @@ import 'package:sys_app/features/presentation/widgets/posts_page/post_list_widge
 
 import '../bloc/posts/posts_bloc.dart';
 
+// Страница для отображения списка постов
 class PostsPage extends StatelessWidget {
   const PostsPage({Key? key}) : super(key: key);
 
@@ -21,22 +22,26 @@ class PostsPage extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: BlocBuilder<PostsBloc, PostsState>(
         builder: (context, state) {
+          // Обработка состояний BLoC
           if (state is LoadingPostsState) {
-            return LoadingWidget();
+            return LoadingWidget(); // Индикатор загрузки
           } else if (state is LoadedPostsState) {
             return RefreshIndicator(
-              onRefresh: () => _onRefresh(context),
+              onRefresh: () => _onRefresh(context), // Обновление списка постов
               child: PostListWidget(posts: state.posts),
             );
           } else if (state is ErrorPostsState) {
-            return MessageDisplayWidget(message: state.message);
+            return MessageDisplayWidget(
+              message: state.message,
+            ); // Сообщение об ошибке
           }
-          return LoadingWidget();
+          return LoadingWidget(); // По умолчанию индикатор загрузки
         },
       ),
     );
   }
 
+  // Метод для обработки обновления списка постов
   Future<void> _onRefresh(BuildContext context) async {
     BlocProvider.of<PostsBloc>(context).add(RefreshPostsEvent());
   }

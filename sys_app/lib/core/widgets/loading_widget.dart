@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Виджет для отображения индикатора загрузки
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({Key? key}) : super(key: key);
 

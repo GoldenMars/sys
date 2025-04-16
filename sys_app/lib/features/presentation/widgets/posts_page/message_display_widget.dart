@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Виджет для отображения сообщения
 class MessageDisplayWidget extends StatelessWidget {
   final String message;
   const MessageDisplayWidget({Key? key, required this.message})

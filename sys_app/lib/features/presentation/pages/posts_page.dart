@@ -28,6 +28,7 @@ class PostsPage extends StatelessWidget {
           } else if (state is LoadedPostsState) {
             return RefreshIndicator(
               onRefresh: () => _onRefresh(context), // Обновление списка постов
+              color: Colors.white,
               child: PostListWidget(posts: state.posts),
             );
           } else if (state is ErrorPostsState) {
